@@ -15,42 +15,48 @@ const CourseCard = ({ course }: CourseCardProps) => {
 
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow bg-gradient-card">
-      <div className="h-32 overflow-hidden">
-        <img 
-          src={course.imageUrl} 
-          alt={course.title}
-          className="w-full h-full object-cover"
-        />
-      </div>
-      <CardHeader className="pb-3">
-        <CardTitle className="text-lg line-clamp-2">{course.title}</CardTitle>
-        <p className="text-sm text-muted-foreground line-clamp-2">{course.description}</p>
-      </CardHeader>
-      <CardContent className="space-y-3">
-        <div className="flex items-center gap-4 text-sm text-muted-foreground">
-          <div className="flex items-center gap-1">
-            <BookOpen className="h-4 w-4" />
-            <span>{course.chapters.length} {t('course.chapters')}</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <Clock className="h-4 w-4" />
-            <span>{course.estimatedHours}h</span>
-          </div>
+      <div className="flex gap-3 p-3">
+        {/* Image on the left */}
+        <div className="w-24 h-24 flex-shrink-0 overflow-hidden rounded-md">
+          <img 
+            src={course.imageUrl} 
+            alt={course.title}
+            className="w-full h-full object-cover"
+          />
         </div>
-        {course.progress > 0 && (
-          <div className="space-y-1">
-            <Progress value={course.progress} className="h-2" />
-            <p className="text-xs text-muted-foreground text-right">{course.progress}% {t('course.completed')}</p>
+        
+        {/* Content on the right */}
+        <div className="flex-1 flex flex-col justify-between min-w-0">
+          <div>
+            <h3 className="font-semibold text-sm line-clamp-1 mb-1">{course.title}</h3>
+            <p className="text-xs text-muted-foreground line-clamp-2 mb-2">{course.description}</p>
+            
+            <div className="flex items-center gap-3 text-xs text-muted-foreground mb-2">
+              <div className="flex items-center gap-1">
+                <BookOpen className="h-3 w-3" />
+                <span>{course.chapters.length}</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <Clock className="h-3 w-3" />
+                <span>{course.estimatedHours}h</span>
+              </div>
+            </div>
+            
+            {course.progress > 0 && (
+              <div className="space-y-1">
+                <Progress value={course.progress} className="h-1.5" />
+                <p className="text-xs text-muted-foreground">{course.progress}%</p>
+              </div>
+            )}
           </div>
-        )}
-      </CardContent>
-      <CardFooter>
-        <Link to={`/course/${course.id}`} className="w-full">
-          <Button className="w-full" variant={course.progress > 0 ? 'outline' : 'default'}>
-            {course.progress > 0 ? t('course.continue') : t('course.start')}
-          </Button>
-        </Link>
-      </CardFooter>
+          
+          <Link to={`/course/${course.id}`} className="mt-2">
+            <Button size="sm" className="w-full h-7 text-xs" variant={course.progress > 0 ? 'outline' : 'default'}>
+              {course.progress > 0 ? t('course.continue') : t('course.start')}
+            </Button>
+          </Link>
+        </div>
+      </div>
     </Card>
   );
 };
