@@ -1,5 +1,5 @@
-import { Clock } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Clock, BookOpen, CheckCircle2, PlayCircle } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
 import CourseCard from '@/components/CourseCard';
 import BottomNav from '@/components/BottomNav';
 import { useAuth } from '@/contexts/AuthContext';
@@ -12,6 +12,10 @@ const Dashboard = () => {
 
   const assignedCourses = mockCourses.filter(c => c.type === 'assigned');
   const publicCourses = mockCourses.filter(c => c.type === 'public');
+  
+  const enrolledCourses = mockCourses.length;
+  const completedCourses = user?.completedCourses.length || 0;
+  const inProgressCourses = mockCourses.filter(c => c.progress > 0 && c.progress < 100).length;
 
   return (
     <div className="min-h-screen pb-20 bg-background">
@@ -21,19 +25,59 @@ const Dashboard = () => {
         <p className="text-primary-foreground/90">{user?.name}</p>
       </div>
 
-      {/* Study Hours Card */}
+      {/* Stats Cards */}
       <div className="px-4 -mt-4 mb-6">
-        <Card className="bg-card shadow-lg">
-          <CardContent className="flex items-center justify-between p-6">
-            <div>
-              <p className="text-sm text-muted-foreground">{t('dashboard.studyHours')}</p>
-              <p className="text-3xl font-bold text-primary">{user?.studyHours || 0}</p>
-            </div>
-            <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-              <Clock className="h-8 w-8 text-primary" />
-            </div>
-          </CardContent>
-        </Card>
+        <div className="grid grid-cols-2 gap-3 mb-3">
+          <Card className="bg-card shadow-md">
+            <CardContent className="p-3">
+              <div className="flex items-center gap-2 mb-1">
+                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                  <BookOpen className="h-4 w-4 text-primary" />
+                </div>
+                <p className="text-xs text-muted-foreground">{t('dashboard.enrolled') || 'Enrolled'}</p>
+              </div>
+              <p className="text-2xl font-bold text-foreground">{enrolledCourses}</p>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-card shadow-md">
+            <CardContent className="p-3">
+              <div className="flex items-center gap-2 mb-1">
+                <div className="w-8 h-8 rounded-full bg-success/10 flex items-center justify-center">
+                  <CheckCircle2 className="h-4 w-4 text-success" />
+                </div>
+                <p className="text-xs text-muted-foreground">{t('dashboard.completed') || 'Completed'}</p>
+              </div>
+              <p className="text-2xl font-bold text-foreground">{completedCourses}</p>
+            </CardContent>
+          </Card>
+        </div>
+        
+        <div className="grid grid-cols-2 gap-3">
+          <Card className="bg-card shadow-md">
+            <CardContent className="p-3">
+              <div className="flex items-center gap-2 mb-1">
+                <div className="w-8 h-8 rounded-full bg-warning/10 flex items-center justify-center">
+                  <PlayCircle className="h-4 w-4 text-warning" />
+                </div>
+                <p className="text-xs text-muted-foreground">{t('dashboard.inProgress') || 'In Progress'}</p>
+              </div>
+              <p className="text-2xl font-bold text-foreground">{inProgressCourses}</p>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-card shadow-md">
+            <CardContent className="p-3">
+              <div className="flex items-center gap-2 mb-1">
+                <div className="w-8 h-8 rounded-full bg-info/10 flex items-center justify-center">
+                  <Clock className="h-4 w-4 text-info" />
+                </div>
+                <p className="text-xs text-muted-foreground">{t('dashboard.studyHours') || 'Study Hours'}</p>
+              </div>
+              <p className="text-2xl font-bold text-foreground">{user?.studyHours || 0}</p>
+            </CardContent>
+          </Card>
+        </div>
       </div>
 
       {/* Assigned Courses */}

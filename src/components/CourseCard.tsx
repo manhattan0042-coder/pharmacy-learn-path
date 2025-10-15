@@ -14,39 +14,39 @@ const CourseCard = ({ course }: CourseCardProps) => {
   const { t } = useLanguage();
 
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition-shadow bg-gradient-card">
-      <div className="h-32 overflow-hidden">
+    <Card className="overflow-hidden hover:shadow-md transition-shadow bg-gradient-card">
+      <div className="h-24 overflow-hidden">
         <img 
           src={course.imageUrl} 
           alt={course.title}
           className="w-full h-full object-cover"
         />
       </div>
-      <CardHeader className="pb-3">
-        <CardTitle className="text-lg line-clamp-2">{course.title}</CardTitle>
-        <p className="text-sm text-muted-foreground line-clamp-2">{course.description}</p>
+      <CardHeader className="p-3 pb-2">
+        <CardTitle className="text-base line-clamp-1">{course.title}</CardTitle>
+        <p className="text-xs text-muted-foreground line-clamp-1">{course.description}</p>
       </CardHeader>
-      <CardContent className="space-y-3">
-        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+      <CardContent className="p-3 pt-0 space-y-2">
+        <div className="flex items-center gap-3 text-xs text-muted-foreground">
           <div className="flex items-center gap-1">
-            <BookOpen className="h-4 w-4" />
+            <BookOpen className="h-3 w-3" />
             <span>{course.chapters.length} {t('course.chapters')}</span>
           </div>
           <div className="flex items-center gap-1">
-            <Clock className="h-4 w-4" />
+            <Clock className="h-3 w-3" />
             <span>{course.estimatedHours}h</span>
           </div>
         </div>
         {course.progress > 0 && (
           <div className="space-y-1">
-            <Progress value={course.progress} className="h-2" />
-            <p className="text-xs text-muted-foreground text-right">{course.progress}% {t('course.completed')}</p>
+            <Progress value={course.progress} className="h-1.5" />
+            <p className="text-xs text-muted-foreground text-right">{course.progress}%</p>
           </div>
         )}
       </CardContent>
-      <CardFooter>
+      <CardFooter className="p-3 pt-0">
         <Link to={`/course/${course.id}`} className="w-full">
-          <Button className="w-full" variant={course.progress > 0 ? 'outline' : 'default'}>
+          <Button size="sm" className="w-full h-8 text-xs" variant={course.progress > 0 ? 'outline' : 'default'}>
             {course.progress > 0 ? t('course.continue') : t('course.start')}
           </Button>
         </Link>
