@@ -95,7 +95,17 @@ All colors MUST be HSL.
     --shadow-sm: 0 1px 2px 0 hsl(142 70% 45% / 0.1);
     --shadow-md: 0 4px 6px -1px hsl(142 70% 45% / 0.2);
     --shadow-lg: 0 10px 15px -3px hsl(142 70% 45% / 0.3);
+  
+  /* Scrollbar hiding */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
 }
 
 @layer base {

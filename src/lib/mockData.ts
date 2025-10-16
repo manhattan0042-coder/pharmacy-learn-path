@@ -45,7 +45,7 @@ export const mockCourses: Course[] = [
     description: 'Essential knowledge for pharmacy interns',
     imageUrl: 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=400',
     type: 'assigned',
-    progress: 0,
+    progress: 35,
     estimatedHours: 12,
     chapters: [
       {
@@ -191,7 +191,7 @@ export const mockCourses: Course[] = [
     description: 'Advanced clinical pharmacy skills',
     imageUrl: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400',
     type: 'assigned',
-    progress: 0,
+    progress: 60,
     estimatedHours: 20,
     chapters: [
       {
