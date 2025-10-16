@@ -1,4 +1,5 @@
 import { Clock, FileText, CheckCircle2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -26,12 +27,7 @@ const Exams = () => {
           {assignedExams.map(exam => (
             <Card key={exam.id} className="overflow-hidden bg-gradient-card">
               <CardHeader className="p-4 pb-2">
-                <div className="flex items-start justify-between gap-2">
-                  <CardTitle className="text-base line-clamp-2">{exam.title}</CardTitle>
-                  <Badge variant="secondary" className="flex-shrink-0">
-                    {t('exam.assigned')}
-                  </Badge>
-                </div>
+                <CardTitle className="text-base line-clamp-2">{exam.title}</CardTitle>
                 <p className="text-xs text-muted-foreground line-clamp-2 mt-1">{exam.description}</p>
               </CardHeader>
               <CardContent className="p-4 pt-0">
@@ -51,9 +47,11 @@ const Exams = () => {
                 </div>
               </CardContent>
               <CardFooter className="p-4 pt-0">
-                <Button className="w-full" size="sm">
-                  {t('exam.start')}
-                </Button>
+                <Link to={`/exam/${exam.id}`} className="w-full">
+                  <Button className="w-full" size="sm">
+                    {t('exam.start')}
+                  </Button>
+                </Link>
               </CardFooter>
             </Card>
           ))}
@@ -93,9 +91,11 @@ const Exams = () => {
                   </div>
                 </CardContent>
                 <CardFooter className="p-4 pt-0">
-                  <Button className="w-full" variant="outline" size="sm">
-                    {t('exam.view')}
-                  </Button>
+                  <Link to={`/exam/${exam.id}/result`} className="w-full">
+                    <Button className="w-full" variant="outline" size="sm">
+                      {t('exam.view')}
+                    </Button>
+                  </Link>
                 </CardFooter>
               </Card>
             ))}

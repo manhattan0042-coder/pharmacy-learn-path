@@ -321,6 +321,21 @@ export const mockExams: Exam[] = [
         correctAnswer: 'false',
         maxAttempts: 1,
       },
+      {
+        id: 'q3',
+        type: 'checkbox',
+        question: 'Which of the following are responsibilities of a pharmacist?',
+        options: ['Dispense medications', 'Perform surgery', 'Counsel patients', 'Monitor drug interactions'],
+        correctAnswer: ['Dispense medications', 'Counsel patients', 'Monitor drug interactions'],
+        maxAttempts: 1,
+      },
+      {
+        id: 'q4',
+        type: 'fill-blank',
+        question: 'The practice of preparing and dispensing medications is called ___.',
+        correctAnswer: 'pharmacy',
+        maxAttempts: 1,
+      },
     ],
   },
   {

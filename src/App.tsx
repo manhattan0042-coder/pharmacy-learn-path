@@ -10,6 +10,8 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Courses from "./pages/Courses";
 import Exams from "./pages/Exams";
+import ExamDetail from "./pages/ExamDetail";
+import ExamResult from "./pages/ExamResult";
 import CourseDetail from "./pages/CourseDetail";
 import LessonDetail from "./pages/LessonDetail";
 import Leaderboard from "./pages/Leaderboard";
@@ -37,6 +39,8 @@ const App = () => (
                 <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                 <Route path="/courses" element={<ProtectedRoute><Courses /></ProtectedRoute>} />
                 <Route path="/exams" element={<ProtectedRoute><Exams /></ProtectedRoute>} />
+                <Route path="/exam/:examId" element={<ProtectedRoute><ExamDetail /></ProtectedRoute>} />
+                <Route path="/exam/:examId/result" element={<ProtectedRoute><ExamResult /></ProtectedRoute>} />
                 <Route path="/course/:courseId" element={<ProtectedRoute><CourseDetail /></ProtectedRoute>} />
                 <Route path="/course/:courseId/chapter/:chapterId/lesson/:lessonId" element={<ProtectedRoute><LessonDetail /></ProtectedRoute>} />
                 <Route path="/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />
