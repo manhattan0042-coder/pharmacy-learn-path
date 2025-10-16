@@ -22,8 +22,8 @@ const Exams = () => {
 
       {/* Assigned Exams */}
       <section className="px-4 -mt-4 mb-6">
-        <h2 className="text-lg font-bold mb-3">{t('exam.assigned')}</h2>
-        <div className="space-y-3">
+        {/* <h2 className="text-lg font-bold mb-3">{t('exam.assigned')}</h2> */}
+        <div className="space-y-3 mt-6">
           {assignedExams.map(exam => (
             <Card key={exam.id} className="overflow-hidden bg-gradient-card">
               <CardHeader className="p-4 pb-2">
