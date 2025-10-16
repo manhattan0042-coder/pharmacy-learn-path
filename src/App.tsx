@@ -9,6 +9,7 @@ import { LanguageProvider } from "./contexts/LanguageContext";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Courses from "./pages/Courses";
+import Exams from "./pages/Exams";
 import CourseDetail from "./pages/CourseDetail";
 import LessonDetail from "./pages/LessonDetail";
 import Leaderboard from "./pages/Leaderboard";
@@ -35,6 +36,7 @@ const App = () => (
                 <Route path="/login" element={<Login />} />
                 <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                 <Route path="/courses" element={<ProtectedRoute><Courses /></ProtectedRoute>} />
+                <Route path="/exams" element={<ProtectedRoute><Exams /></ProtectedRoute>} />
                 <Route path="/course/:courseId" element={<ProtectedRoute><CourseDetail /></ProtectedRoute>} />
                 <Route path="/course/:courseId/chapter/:chapterId/lesson/:lessonId" element={<ProtectedRoute><LessonDetail /></ProtectedRoute>} />
                 <Route path="/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />

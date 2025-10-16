@@ -281,3 +281,69 @@ export const mockLeaderboard: LeaderboardEntry[] = [
   { id: '4', name: 'Vanna Keo', studyHours: 28, coursesCompleted: 3, rank: 4 },
   { id: '5', name: 'Bopha Meas', studyHours: 22, coursesCompleted: 3, rank: 5 },
 ];
+
+export interface Exam {
+  id: string;
+  title: string;
+  description: string;
+  duration: number; // in minutes
+  totalQuestions: number;
+  passingScore: number; // percentage
+  questions: Quiz[];
+  completed: boolean;
+  score?: number;
+  assignedDate: string;
+}
+
+export const mockExams: Exam[] = [
+  {
+    id: 'exam-1',
+    title: 'Pharmacy Fundamentals Assessment',
+    description: 'Comprehensive exam covering basic pharmacy knowledge',
+    duration: 60,
+    totalQuestions: 20,
+    passingScore: 70,
+    completed: false,
+    assignedDate: '2024-01-15',
+    questions: [
+      {
+        id: 'q1',
+        type: 'multiple-choice',
+        question: 'What is the primary role of a pharmacist?',
+        options: ['Selling medications', 'Dispensing and reviewing medications', 'Manufacturing drugs', 'All of the above'],
+        correctAnswer: 'Dispensing and reviewing medications',
+        maxAttempts: 1,
+      },
+      {
+        id: 'q2',
+        type: 'true-false',
+        question: 'Patient confidentiality is optional in pharmacy practice.',
+        correctAnswer: 'false',
+        maxAttempts: 1,
+      },
+    ],
+  },
+  {
+    id: 'exam-2',
+    title: 'Clinical Pharmacy Practice Exam',
+    description: 'Test your clinical pharmacy skills and knowledge',
+    duration: 90,
+    totalQuestions: 30,
+    passingScore: 75,
+    completed: false,
+    assignedDate: '2024-01-20',
+    questions: [],
+  },
+  {
+    id: 'exam-3',
+    title: 'Medication Safety Certification',
+    description: 'Certification exam for medication safety protocols',
+    duration: 45,
+    totalQuestions: 15,
+    passingScore: 80,
+    completed: true,
+    score: 87,
+    assignedDate: '2024-01-10',
+    questions: [],
+  },
+];
