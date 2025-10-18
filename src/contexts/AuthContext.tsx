@@ -1,13 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  studyHours: number;
-  completedCourses: string[];
-  certificates: string[];
-}
+import { repositoryFactory } from '@/data/repositories/RepositoryFactory';
+import { User } from '@/data/models/User';
 
 interface AuthContextType {
   user: User | null;
@@ -21,72 +14,41 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(() => {
-    const stored = localStorage.getItem('currentUser');
-    return stored ? JSON.parse(stored) : null;
-  });
+  const [user, setUser] = useState<User | null>(null);
+  const userRepo = repositoryFactory.getUserRepository();
 
   useEffect(() => {
-    if (user) {
-      localStorage.setItem('currentUser', JSON.stringify(user));
-    } else {
-      localStorage.removeItem('currentUser');
-    }
-  }, [user]);
+    loadUser();
+  }, []);
+
+  const loadUser = async () => {
+    const currentUser = await userRepo.getCurrentUser();
+    setUser(currentUser);
+  };
 
   const register = async (name: string, email: string, password: string) => {
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    
-    if (users.find((u: any) => u.email === email)) {
-      throw new Error('User already exists');
-    }
-
-    const newUser: User = {
-      id: Date.now().toString(),
-      name,
-      email,
-      studyHours: 0,
-      completedCourses: [],
-      certificates: [],
-    };
-
-    users.push({ ...newUser, password });
-    localStorage.setItem('users', JSON.stringify(users));
+    const newUser = await userRepo.register(name, email, password);
     setUser(newUser);
   };
 
   const login = async (email: string, password: string) => {
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const foundUser = users.find((u: any) => u.email === email && u.password === password);
-
-    if (!foundUser) {
-      throw new Error('Invalid credentials');
-    }
-
-    const { password: _, ...userWithoutPassword } = foundUser;
-    setUser(userWithoutPassword);
+    const loggedInUser = await userRepo.login(email, password);
+    setUser(loggedInUser);
   };
 
-  const logout = () => {
+  const logout = async () => {
+    await userRepo.logout();
     setUser(null);
   };
 
-  const updateStudyHours = (hours: number) => {
-    if (user) {
-      const updatedUser = { ...user, studyHours: user.studyHours + hours };
-      setUser(updatedUser);
-    }
+  const updateStudyHours = async (hours: number) => {
+    await userRepo.updateStudyHours(hours);
+    await loadUser();
   };
 
-  const completeCourse = (courseId: string) => {
-    if (user && !user.completedCourses.includes(courseId)) {
-      const updatedUser = {
-        ...user,
-        completedCourses: [...user.completedCourses, courseId],
-        certificates: [...user.certificates, `CERT-${courseId}-${Date.now()}`],
-      };
-      setUser(updatedUser);
-    }
+  const completeCourse = async (courseId: string) => {
+    await userRepo.completeCourse(courseId);
+    await loadUser();
   };
 
   return (

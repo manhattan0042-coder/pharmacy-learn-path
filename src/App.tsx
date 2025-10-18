@@ -17,6 +17,7 @@ import LessonDetail from "./pages/LessonDetail";
 import Leaderboard from "./pages/Leaderboard";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
+import StudyHoursDetail from "./presentation/pages/StudyHoursDetail";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,7 @@ const App = () => (
                 <Route path="/exam/:examId/result" element={<ProtectedRoute><ExamResult /></ProtectedRoute>} />
                 <Route path="/course/:courseId" element={<ProtectedRoute><CourseDetail /></ProtectedRoute>} />
                 <Route path="/course/:courseId/chapter/:chapterId/lesson/:lessonId" element={<ProtectedRoute><LessonDetail /></ProtectedRoute>} />
+                <Route path="/study-hours" element={<ProtectedRoute><StudyHoursDetail /></ProtectedRoute>} />
                 <Route path="/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />
                 <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
                 <Route path="*" element={<NotFound />} />

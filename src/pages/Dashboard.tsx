@@ -26,7 +26,10 @@ const Dashboard = () => {
 
       {/* Study Hours Card */}
       <div className="px-4 -mt-4 mb-6">
-        <Card className="bg-card shadow-lg">
+        <Card 
+          className="bg-card shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
+          onClick={() => window.location.href = '/study-hours'}
+        >
           <CardContent className="flex items-center justify-between p-6">
             <div>
               <p className="text-sm text-muted-foreground">{t('dashboard.studyHours')}</p>
